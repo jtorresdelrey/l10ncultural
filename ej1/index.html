@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio-Demo de Localización Técnico-Cultural</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .quiz-card { transition: all 0.3s ease; }
+        .feedback {
+            display: none;
+            padding: 0.75rem;
+            margin-top: 0.5rem;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+        }
+        .feedback.correct { display: block; background-color: #dcfce7; border-left: 4px solid #22c55e; color: #166534; }
+        .feedback.incorrect { display: block; background-color: #fee2e2; border-left: 4px solid #ef4444; color: #991b1b; }
+        select.correct, input.correct { border-color: #22c55e !important; box-shadow: 0 0 0 2px #a7f3d0; }
+        select.incorrect, input.incorrect { border-color: #ef4444 !important; box-shadow: 0 0 0 2px #fecaca; }
+        #score-bar-inner { transition: width 0.5s ease-in-out; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+
+    <div class="container mx-auto max-w-5xl p-4 md:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-slate-800">Demo-Ejercicio: Localización Técnico-Cultural</h1>
+            <p class="mt-2 text-slate-600">Adapta la web de "Global Events Inc." de EE.UU. al mercado seleccionado.</p>
+        </header>
+
+        <!-- Panel de Control y Puntuación -->
+        <div class="bg-white p-4 rounded-xl shadow-lg mb-8 sticky top-4 z-10">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="flex items-center space-x-3">
+                    <label for="locale-selector" class="font-semibold text-lg">Localizar para:</label>
+                    <select id="locale-selector" class="text-lg rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        <option value="es-ES">España</option>
+                        <option value="de-DE">Alemania</option>
+                        <option value="en-GB">Reino Unido</option>
+                        <option value="fr-MA">Marruecos (francófono)</option>
+                        <option value="ja-JP">Japón</option>
+                        <option value="zh-CN">China</option>
+                        <option value="ru-RU">Rusia</option>
+                        <option value="ar-AE">Emiratos Árabes Unidos</option>
+                        <option value="pt-BR">Brasil</option>
+                        <option value="es-MX">México</option>
+                    </select>
+                </div>
+                <div class="w-full md:w-2/5">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-base font-medium text-blue-700">Progreso del Ejercicio</span>
+                        <span id="score-text" class="text-sm font-medium text-blue-700">0 / 0</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-3">
+                        <div id="score-bar-inner" class="bg-blue-600 h-3 rounded-full" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Base Product Page (USA) -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-xl font-bold mb-4 border-b pb-2">Página Original (EE.UU.)</h2>
+                
+                <!-- Video Banner -->
+                <div class="mb-4">
+                    <h3 class="font-semibold text-lg mb-2">Banner de Portada:</h3>
+                    <div class="aspect-video bg-slate-800 rounded-lg flex items-center justify-center text-white">
+                        <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm10.293 5.293a1 1 0 00-1.414 0L10 12.586l-2.879-2.88a1 1 0 00-1.414 1.414l3.586 3.586a1 1 0 001.414 0l3.586-3.586a1 1 0 000-1.414z"></path></svg>
+                        <span class="ml-2">High-Resolution Video Banner</span>
+                    </div>
+                </div>
+
+                <!-- Calendar -->
+                <div class="mb-4">
+                    <h3 class="font-semibold text-lg mb-2">Calendario de Eventos:</h3>
+                    <div class="p-4 border rounded-lg bg-slate-50">
+                        <p class="text-center font-bold">October 2025</p>
+                        <div class="grid grid-cols-7 gap-1 text-center text-sm mt-2">
+                            <div class="font-bold">Sun</div><div class="font-bold">Mon</div><div class="font-bold">Tue</div><div class="font-bold">Wed</div><div class="font-bold">Thu</div><div class="font-bold">Fri</div><div class="font-bold">Sat</div>
+                            <div></div><div></div><div></div><div>1</div><div>2</div><div>3</div><div>4</div>
+                            <div>5</div><div>6</div><div class="bg-blue-200 rounded-full">7</div><div>8</div><div>9</div><div>10</div><div>11</div>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-500 mt-1">Next event: October 7th, 2025 at 2:30 PM</p>
+                </div>
+                
+                <!-- Brochure Download -->
+                <div>
+                    <h3 class="font-semibold text-lg mb-2">Descarga de Folleto:</h3>
+                    <a href="#" class="text-blue-600 underline">Download our new brochure (PDF, Letter Size)</a>
+                </div>
+            </div>
+
+            <!-- Interactive Quiz Area -->
+            <div id="quiz-area" class="space-y-6">
+                <!-- Se llenará con JS -->
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="text-center py-8 text-sm text-slate-500">
+        <p>Jesús Torres del Rey (procesado por Gemini)</p>
+    </footer>
+
+<script>
+const quizData = {
+    'es-ES': [
+        { id: 'week_start', type: 'select', question: 'Para un calendario en España, la semana debería empezar en...', options: ['Domingo', 'Lunes', 'Sábado'], answer: 'Lunes', feedback: '¡Correcto! En España y la mayor parte de Europa, la semana laboral y social comienza el lunes, según la norma ISO 8601.' },
+        { id: 'time_format', type: 'select', question: 'La hora del evento (2:30 PM) se mostraría como...', options: ['2:30 PM', '14:30', '14h30'], answer: '14:30', feedback: '¡Perfecto! En España se utiliza predominantemente el formato de 24 horas.' },
+        { id: 'paper_size', type: 'select', question: 'Para el folleto descargable, ¿qué formato de papel indicarías?', options: ['Letter Size', 'Formato A4', 'Formato Folio'], answer: 'Formato A4', feedback: '¡Muy bien! El estándar internacional y español es el A4 (ISO 216). El formato Letter es estadounidense.' },
+        { id: 'bandwidth', type: 'select', question: 'España tiene buen ancho de banda. ¿Qué hacemos con el banner de vídeo?', options: ['Dejar el vídeo', 'Poner una imagen estática', 'Quitar el banner'], answer: 'Dejar el vídeo', feedback: 'Correcto. Con una buena infraestructura de internet como la española, mantener una experiencia multimedia rica como un vídeo es apropiado.' },
+    ],
+    'de-DE': [
+        { id: 'week_start', type: 'select', question: 'Para un calendario en Alemania, la semana debería empezar en...', options: ['Sonntag (Domingo)', 'Montag (Lunes)', 'Samstag (Sábado)'], answer: 'Montag (Lunes)', feedback: '¡Correcto! Alemania también sigue la norma ISO 8601, por lo que la semana comienza el lunes.' },
+        { id: 'time_format', type: 'select', question: 'La hora del evento (2:30 PM) se mostraría como...', options: ['2:30 PM', '14:30 Uhr', '14:30'], answer: '14:30 Uhr', feedback: '¡Muy bien! Se usa el formato de 24 horas, y es muy común añadir "Uhr" (hora) después.' },
+        { id: 'paper_size', type: 'select', question: 'Para el folleto descargable, ¿qué formato de papel indicarías?', options: ['Letter-Format', 'A4-Format', 'Brief-Format'], answer: 'A4-Format', feedback: '¡Perfecto! El estándar en Alemania y toda Europa es el A4.' },
+        { id: 'bandwidth', type: 'select', question: 'Alemania tiene excelente ancho de banda. ¿Qué hacemos con el banner de vídeo?', options: ['Video beibehalten (Dejar el vídeo)', 'Statisches Bild (Imagen estática)', 'Banner entfernen (Quitar banner)'], answer: 'Video beibehalten (Dejar el vídeo)', feedback: 'Correcto. Con una de las mejores conexiones de Europa, no hay razón para reducir la calidad de la experiencia multimedia.' },
+    ],
+    'en-GB': [
+        { id: 'week_start', type: 'select', question: 'For a calendar in the UK, the week should start on...', options: ['Sunday', 'Monday', 'Saturday'], answer: 'Monday', feedback: 'Correct! The UK, like most of Europe, follows the ISO 8601 standard, where the week begins on Monday.' },
+        { id: 'time_format', type: 'select', question: 'The event time (2:30 PM) would be shown as...', options: ['2:30pm', '14:30', '2.30 p.m.'], answer: '14:30', feedback: 'Correct. While the 12-hour clock (2:30pm) is used universally in speech, the 24-hour format is standard for written schedules (TV guides, transport, event times) to avoid ambiguity.' },
+        { id: 'paper_size', type: 'select', question: 'For the downloadable brochure, which paper size would you specify?', options: ['Letter Size', 'A4 Format', 'Legal Format'], answer: 'A4 Format', feedback: 'Spot on! A4 is the standard paper size in the UK and internationally. Letter is the North American standard.' },
+        { id: 'terminology', type: 'select', question: 'The US site mentions a "Fall event". How would you localize "Fall"?', options: ['Fall', 'Autumn', 'Harvest'], answer: 'Autumn', feedback: 'Excellent! "Autumn" is the correct term in British English. This is a classic example of why you must localize even between dialects of the same language.' },
+    ],
+    'fr-MA': [
+        { id: 'week_start', type: 'select', question: 'Para un calendario en Marruecos, la semana debería empezar en...', options: ['Dimanche (Domingo)', 'Lundi (Lunes)', 'Samedi (Sábado)'], answer: 'Lundi (Lunes)', feedback: '¡Correcto! Al igual que en Francia, la semana estándar comienza el lunes.' },
+        { id: 'time_format', type: 'select', question: 'La hora del evento (2:30 PM) se mostraría como...', options: ['2:30 PM', '14h30', '14:30'], answer: '14h30', feedback: '¡Muy bien! Se usa el formato de 24 horas, y la convención francesa a menudo utiliza una "h" como separador.' },
+        { id: 'paper_size', type: 'select', question: 'Para el folleto descargable, ¿qué formato de papel indicarías?', options: ['Format Lettre', 'Format A4', 'Format Légal'], answer: 'Format A4', feedback: '¡Perfecto! Marruecos utiliza el estándar internacional A4.' },
+        { id: 'bandwidth', type: 'select', question: 'El ancho de banda en Marruecos es más limitado que en Europa. ¿Qué hacemos con el vídeo?', options: ['Garder la vidéo (Dejar el vídeo)', 'Remplacer par une image statique optimisée (Reemplazar por imagen estática)', 'Afficher un bouton "Charger la vidéo" (Mostrar botón "Cargar vídeo")'], answer: 'Remplacer par une image statique optimisée (Reemplazar por imagen estática)', feedback: '¡Excelente decisión de localización! Para mercados con menor velocidad de internet o donde los datos móviles son caros, reemplazar un vídeo pesado por una imagen ligera es clave para no frustrar al usuario y mejorar el tiempo de carga.' },
+    ],
+    'ja-JP': [
+        { id: 'week_start', type: 'select', question: 'Para un calendario en Japón, la semana debería empezar en...', options: ['月曜日 (Lunes)', '日曜日 (Domingo)', '土曜日 (Sábado)'], answer: '日曜日 (Domingo)', feedback: '¡Correcto! A diferencia de Europa, la convención en Japón es que los calendarios comiencen en domingo, como en EE.UU.' },
+        { id: 'time_format', type: 'select', question: 'La hora del evento (2:30 PM) se mostraría como...', options: ['2:30 PM', '14:30', '午後2時30分 (Tarde 2 horas 30 min)'], answer: '午後2時30分 (Tarde 2 horas 30 min)', feedback: '¡Perfecto! En Japón se puede usar el formato de 24h, pero es muy común usar el de 12h con los caracteres 午前 (AM) y 午後 (PM).' },
+        { id: 'paper_size', type: 'select', question: 'Para el folleto descargable, ¿qué formato de papel indicarías?', options: ['レターサイズ (Tamaño Carta)', 'A4サイズ (Tamaño A4)', 'B5サイズ (Tamaño B5)'], answer: 'A4サイズ (Tamaño A4)', feedback: '¡Correcto! Japón adoptó el estándar ISO 216, por lo que A4 es el formato de documento más común.' },
+        { id: 'bandwidth', type: 'select', question: 'Japón tiene uno de los mejores anchos de banda del mundo. ¿Qué hacemos con el vídeo?', options: ['ビデオを維持 (Mantener el vídeo)', '静止画像に置き換える (Reemplazar con imagen)', 'ビデオを削除 (Eliminar vídeo)'], answer: 'ビデオを維持 (Mantener el vídeo)', feedback: 'Correcto. En un mercado con conexiones de fibra óptica ultrarrápidas, ofrecer la experiencia multimedia más rica posible es la mejor opción.' },
+    ],
+    'zh-CN': [
+        { id: 'week_start', type: 'select', question: 'Para un calendario en China, la semana empieza en...', options: ['星期天 (Domingo)', '星期一 (Lunes)', '星期六 (Sábado)'], answer: '星期一 (Lunes)', feedback: '¡Correcto! En el contexto empresarial y moderno de China, la semana comienza el lunes, alineándose con el estándar internacional ISO 8601.' },
+        { id: 'time_format', type: 'select', question: 'La hora del evento (2:30 PM) se mostraría como...', options: ['下午2:30', '2:30 PM', '14:30'], answer: '14:30', feedback: 'Correcto. El formato de 24 horas es el estándar para horarios y eventos oficiales en China.' },
+        { id: 'paper_size', type: 'select', question: 'Para el folleto descargable, ¿qué formato de papel indicarías?', options: ['信纸尺寸 (Tamaño Carta)', 'A4尺寸 (Tamaño A4)', 'B5尺寸 (Tamaño B5)'], answer: 'A4尺寸 (Tamaño A4)', feedback: '¡Muy bien! China utiliza la serie de tamaños de papel ISO 216, siendo A4 el más común para documentos.' },
+        { id: 'lucky_number', type: 'select', question: 'El evento es el día 7. Si pudieras moverlo para una promoción, ¿qué día cercano sería culturalmente mejor para atraer público en China?', options: ['El día 4', 'El día 8', 'El día 7 está bien'], answer: 'El día 8', feedback: '¡Excelente! El número 8 (八 bā) suena parecido a la palabra para "prosperidad" (发 fā) y es considerado el número de la suerte por excelencia. En cambio, el 4 se evita por sonar como "muerte".' }
+    ],
+     'ru-RU': [
+        { id: 'week_start', type: 'select', question: 'Para un calendario en Rusia, la semana debería empezar en...', options: ['Воскресенье (Domingo)', 'Понедельник (Lunes)', 'Суббота (Sábado)'], answer: 'Понедельник (Lunes)', feedback: '¡Correcto! En Rusia, la semana laboral y estándar comienza el lunes.' },
+        { id: 'time_format', type: 'select', question: 'La hora del evento (2:30 PM) se mostraría como...', options: ['2:30 PM', '14:30', '14:30 час'], answer: '14:30', feedback: '¡Perfecto! Se utiliza el formato de 24 horas de forma estándar y sin sufijos adicionales.' },
+        { id: 'paper_size', type: 'select', question: 'Para el folleto descargable, ¿qué formato de papel indicarías?', options: ['Letter', 'A4', 'Legal'], answer: 'A4', feedback: 'Correcto. A4 es el estándar para documentos en Rusia.' },
+        { id: 'bandwidth', type: 'select', question: 'El ancho de banda en las grandes ciudades rusas es bueno, pero variable en zonas rurales. ¿Qué hacemos con el vídeo?', options: ['Dejar el vídeo de alta resolución', 'Usar un vídeo de menor resolución', 'Reemplazar por imagen'], answer: 'Usar un vídeo de menor resolución', feedback: 'Buena decisión. Ofrecer un vídeo más ligero es un buen compromiso para no penalizar a los usuarios con conexiones más lentas, manteniendo una experiencia multimedia.' },
+    ],
+    'ar-AE': [
+        { id: 'week_start', type: 'select', question: 'Para un calendario en EAU, la semana empieza en...', options: ['الجمعة (Viernes)', 'الأحد (Domingo)', 'السبت (Sábado)'], answer: 'السبت (Sábado)', feedback: '¡Correcto! En muchos países de Oriente Medio el fin de semana es viernes y sábado, por lo que la semana laboral empieza el domingo. El sábado es el primer día tras el descanso del viernes.' },
+        { id: 'time_format', type: 'select', question: 'La hora del evento (2:30 PM) se mostraría como...', options: ['٢:٣٠ مساءً', '14:30', '2:30 PM'], answer: '14:30', feedback: 'Correcto. El formato de 24 horas es ampliamente utilizado en contextos formales y digitales para evitar ambigüedad.' },
+        { id: 'paper_size', type: 'select', question: 'Para el folleto descargable, ¿qué formato de papel indicarías?', options: ['Letter', 'A4', 'Legal'], answer: 'A4', feedback: '¡Muy bien! A4 es el estándar de papel en EAU.' },
+        { id: 'bandwidth', type: 'select', question: 'EAU tiene una infraestructura de internet excelente. ¿Qué hacemos con el vídeo?', options: ['Dejar el vídeo de alta resolución', 'Poner una imagen', 'Ofrecer versión de baja calidad'], answer: 'Dejar el vídeo de alta resolución', feedback: 'Correcto. Con un ancho de banda de primer nivel, los usuarios en EAU esperan y pueden cargar contenido multimedia de alta calidad sin problemas.' },
+    ],
+    'pt-BR': [
+        { id: 'week_start', type: 'select', question: 'Para um calendário no Brasil, a semana deve começar em...', options: ['Segunda-feira (Lunes)', 'Domingo', 'Sábado'], answer: 'Domingo', feedback: 'Correto! No Brasil, assim como nos EUA, a convenção é que a semana comece no domingo nos calendários.' },
+        { id: 'time_format', type: 'select', question: 'A hora do evento (2:30 PM) seria exibida como...', options: ['2:30 PM', '14:30', '14h30'], answer: '14:30', feedback: 'Correto! O formato de 24 horas é o padrão para horários em contextos formais e digitais no Brasil.' },
+        { id: 'paper_size', type: 'select', question: 'Para o folheto para download, qual formato de papel você indicaria?', options: ['Tamanho Carta (Letter)', 'Formato A4', 'Formato Ofício (Legal)'], answer: 'Formato A4', feedback: 'Exato! O Brasil adotou o padrão internacional A4 como formato oficial de papel.' },
+        { id: 'bandwidth', type: 'select', question: 'A banda larga no Brasil é variável. O que fazemos com o vídeo?', options: ['Manter o vídeo', 'Substituir por imagem otimizada', 'Usar um vídeo de menor resolução'], answer: 'Usar um vídeo de menor resolución', feedback: 'Boa escolha. Oferecer um vídeo mais leve é um bom equilíbrio para garantir uma boa experiência tanto para usuários com conexões rápidas quanto para aqueles com conexões mais lentas.' },
+    ],
+    'es-MX': [
+        { id: 'week_start', type: 'select', question: 'Para un calendario en México, la semana debería empezar en...', options: ['Lunes', 'Domingo', 'Sábado'], answer: 'Domingo', feedback: '¡Correcto! Tradicionalmente en México, y por influencia de EE.UU., los calendarios suelen mostrar el domingo como primer día de la semana.' },
+        { id: 'time_format', type: 'select', question: 'La hora del evento (2:30 PM) se mostraría como...', options: ['14:30', '2:30 p. m.', '2:30 de la tarde'], answer: '2:30 p. m.', feedback: '¡Perfecto! Aunque se entiende el formato de 24h, el de 12 horas con a.m./p. m. es el más común y natural en la comunicación cotidiana en México.' },
+        { id: 'paper_size', type: 'select', question: 'Para el folleto descargable, ¿qué formato de papel indicarías?', options: ['Tamaño Carta (Letter)', 'Tamaño A4', 'Tamaño Oficio (Legal)'], answer: 'Tamaño Carta (Letter)', feedback: '¡Exacto! Por su proximidad e influencia comercial con EE.UU., el estándar de papel en México es Carta (Letter), no A4. Esta es una diferencia clave con Europa y Sudamérica.' },
+        { id: 'payment', type: 'select', question: 'Además de las tarjetas, ¿qué método de pago en efectivo es fundamental en México?', options: ['Pago en OXXO', 'Transferencia SPEI', 'PayPal'], answer: 'Pago en OXXO', feedback: '¡Muy bien! Permitir el pago en efectivo en tiendas de conveniencia como OXXO es crucial para llegar a un amplio sector de la población que no usa o no confía en las tarjetas bancarias para compras online.' },
+    ]
+};
+
+let currentLocale = 'es-ES';
+let totalQuestions = 0;
+let correctAnswers = 0;
+
+function createQuizCard(item, index) {
+    const card = document.createElement('div');
+    card.className = 'quiz-card bg-white p-6 rounded-xl shadow-lg';
+    card.id = `q-${item.id}`;
+
+    let inputHtml = '';
+    if (item.type === 'select') {
+        const optionsHtml = item.options.map(opt => `<option value="${opt}">${opt}</option>`).join('');
+        inputHtml = `<select id="input-${item.id}" class="mt-2 block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"><option value="">-- Selecciona una opción --</option>${optionsHtml}</select>`;
+    }
+
+    card.innerHTML = `
+        <p class="font-semibold text-slate-800 text-lg">${index + 1}. ${item.question}</p>
+        ${inputHtml}
+        <div id="feedback-${item.id}" class="feedback"></div>
+    `;
+    return card;
+}
+
+function checkAnswer(item) {
+    const inputEl = document.getElementById(`input-${item.id}`);
+    const feedbackEl = document.getElementById(`feedback-${item.id}`);
+    const userAnswer = inputEl.value.trim();
+    
+    let isCorrect = userAnswer.toLowerCase() === item.answer.toLowerCase();
+    
+    inputEl.classList.remove('correct', 'incorrect');
+    feedbackEl.classList.remove('correct', 'incorrect');
+
+    if (!userAnswer) {
+        feedbackEl.style.display = 'none';
+        updateScore();
+        return;
+    }
+
+    if (isCorrect) {
+        inputEl.classList.add('correct');
+        feedbackEl.classList.add('correct');
+        feedbackEl.innerHTML = `<span class="font-bold">¡Respuesta Correcta!</span> ${item.feedback}`;
+    } else {
+        inputEl.classList.add('incorrect');
+        feedbackEl.classList.add('incorrect');
+        feedbackEl.innerHTML = `<span class="font-bold">Respuesta Incorrecta.</span> La opción correcta es "${item.answer}". ${item.feedback}`;
+    }
+    updateScore();
+}
+
+function updateScore() {
+    const questions = quizData[currentLocale];
+    correctAnswers = 0;
+    questions.forEach(item => {
+        const inputEl = document.getElementById(`input-${item.id}`);
+        if(inputEl && inputEl.value.toLowerCase() === item.answer.toLowerCase()){
+            correctAnswers++;
+        }
+    });
+    
+    const scoreText = document.getElementById('score-text');
+    const scoreBar = document.getElementById('score-bar-inner');
+    
+    scoreText.textContent = `${correctAnswers} / ${totalQuestions}`;
+    const percentage = totalQuestions > 0 ? (correctAnswers / totalQuestions) * 100 : 0;
+    scoreBar.style.width = `${percentage}%`;
+}
+
+function renderQuiz(locale) {
+    currentLocale = locale;
+    const quizArea = document.getElementById('quiz-area');
+    quizArea.innerHTML = '';
+    const questions = quizData[locale];
+    if (!questions) return;
+    
+    totalQuestions = questions.length;
+    
+    questions.forEach((item, index) => {
+        const card = createQuizCard(item, index);
+        quizArea.appendChild(card);
+        
+        const inputEl = document.getElementById(`input-${item.id}`);
+        inputEl.addEventListener('change', () => checkAnswer(item));
+    });
+    updateScore();
+}
+
+document.getElementById('locale-selector').addEventListener('change', (e) => {
+    renderQuiz(e.target.value);
+});
+
+// Initial Render
+renderQuiz('es-ES');
+
+</script>
+
+</body>
+</html>
+
+

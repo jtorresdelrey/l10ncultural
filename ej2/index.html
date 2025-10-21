@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios interactivos: localización cultural</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        details > summary {
+            cursor: pointer;
+            padding: 0.75rem;
+            background-color: #f0f4f8;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        details > summary:hover {
+            background-color: #e2e8f0;
+        }
+        details[open] > summary {
+            background-color: #e2e8f0;
+        }
+        details > div {
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+            border-top: none;
+            border-radius: 0 0 0.5rem 0.5rem;
+        }
+        .task-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            margin-bottom: 2rem;
+        }
+        .clickable-image {
+            cursor: zoom-in;
+            transition: transform 0.2s;
+        }
+        .clickable-image:hover {
+            transform: scale(1.02);
+        }
+        #imageModal {
+            transition: opacity 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-5xl">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-slate-800">Ejercicios interactivos de localización</h1>
+            <p class="text-lg text-slate-600 mt-2">Grado en Traducción e Interpretación</p>
+        </header>
+
+        <!-- Mini-Tarea 1: Percepción -->
+        <section id="tarea-1" class="task-card">
+            <h2 class="text-2xl font-bold mb-4">Mini-tarea 1: Percepción - Modelos personales</h2>
+            <p class="mb-6 text-lg">Observad las siguientes imágenes de la web de Nivea en diferentes mercados. Luego, debatid en parejas.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <div class="text-center">
+                    <img src="nivea-francia.png" alt="Nivea Francia" class="w-full h-auto rounded-lg shadow-md object-cover clickable-image">
+                    <p class="mt-2 font-semibold">Francia</p>
+                </div>
+                <div class="text-center">
+                    <img src="nivea-japon.png" alt="Nivea Japón" class="w-full h-auto rounded-lg shadow-md object-cover clickable-image">
+                    <p class="mt-2 font-semibold">Japón</p>
+                </div>
+                 <div class="text-center">
+                    <img src="nivea-india.png" alt="Nivea India" class="w-full h-auto rounded-lg shadow-md object-cover clickable-image">
+                    <p class="mt-2 font-semibold">India</p>
+                </div>
+                <div class="text-center">
+                    <img src="nivea-burundi.png" alt="Nivea Burundi" class="w-full h-auto rounded-lg shadow-md object-cover clickable-image">
+                    <p class="mt-2 font-semibold">Burundi (África)</p>
+                </div>
+            </div>
+
+            <p class="font-bold text-xl mb-4 text-center">¿Qué diferencias veis? ¿Por qué creéis que Nivea no usa a la misma modelo en todos los países?</p>
+            
+            <details>
+                <summary>Pistas para la reflexión</summary>
+                <div class="bg-white">
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><b>Cánones de belleza:</b> ¿Qué se considera "bello" en cada cultura?</li>
+                        <li><b>Color de piel:</b> ¿Hay alguna preferencia o ideal en cada mercado?</li>
+                        <li><b>Vestimenta y modestia:</b> Fijaos en la ropa (o la ausencia de ella).</li>
+                        <li><b>Contexto de uso:</b> ¿La imagen sugiere un momento o situación concreta?</li>
+                        <li><b>Aspiracionalidad:</b> ¿Qué imagen representa un ideal al que el público objetivo aspira?</li>
+                    </ul>
+                </div>
+            </details>
+        </section>
+
+        <!-- Mini-Tarea 2: Simbolismo -->
+        <section id="tarea-2" class="task-card">
+            <h2 class="text-2xl font-bold mb-4">Mini-tarea 2: Simbolismo - Colores y números</h2>
+            <div class="mb-6 text-lg">
+                <p class="font-semibold">Escenario:</p>
+                <p>Trabajáis para la oficina de turismo de Castilla y León y queréis lanzar una campaña para atraer turistas de <b>China</b>.</p>
+                <p class="font-bold text-xl mt-4 text-center">Tenéis que elegir el <span class="text-red-600">color principal</span> de la campaña y un <span class="text-blue-600">precio para la oferta</span> (ej. 888€, 444€). ¿Qué color y qué números elegís? ¿Cuáles evitáis a toda costa?</p>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-8 mb-6">
+                <div class="flex-1 bg-gray-50 p-4 rounded-lg">
+                    <h3 class="font-bold text-lg mb-2 text-red-600">🎨 Simbolismo del color (China)</h3>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li><b>Rojo:</b> Suerte, felicidad, celebración.</li>
+                        <li><b>Amarillo/Dorado:</b> Riqueza, poder imperial, realeza.</li>
+                        <li><b>Verde:</b> Salud, naturaleza... pero ¡cuidado! un gorro verde significa infidelidad.</li>
+                        <li><b>Blanco:</b> Luto, muerte, pureza.</li>
+                        <li><b>Negro:</b> Mal, tristeza, oscuridad.</li>
+                    </ul>
+                </div>
+                <div class="flex-1 bg-gray-50 p-4 rounded-lg">
+                    <h3 class="font-bold text-lg mb-2 text-blue-600">🔢 Simbolismo numérico (China)</h3>
+                     <ul class="list-disc list-inside space-y-1">
+                        <li><b>8 (Bā):</b> Suena como "prosperidad". ¡El mejor!</li>
+                        <li><b>6 (Liù):</b> Suena como "fluido" o "sin problemas".</li>
+                        <li><b>9 (Jiǔ):</b> Suena como "longevidad".</li>
+                        <li><b>4 (Sì):</b> Suena como "muerte". ¡El peor! Hay edificios sin planta 4.</li>
+                        <li><b>7 (Qī):</b> Suena como "irse" o "engañar". Se considera negativo.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <details>
+                <summary>Ver solución recomendada</summary>
+                <div class="bg-white">
+                    <h4 class="font-bold">Combinación ganadora:</h4>
+                    <p><b class="text-red-600">Color:</b> El <b>Rojo</b> es la apuesta más segura y positiva. El <b>Amarillo/Dorado</b> también es una excelente opción para transmitir lujo.</p>
+                    <p><b class="text-blue-600">Precio:</b> Cualquier precio que incluya el <b>8</b>. Por ejemplo, un paquete de viaje a 888€ sería extremadamente atractivo. Usar el 6 y el 9 también es positivo.</p>
+                    <h4 class="font-bold mt-4">A evitar a toda costa:</h4>
+                    <p><b class="text-red-600">Color:</b> <b>Blanco</b> y <b>Negro</b>, por sus connotaciones de luto y negatividad.</p>
+                     <p><b class="text-blue-600">Precio:</b> ¡Nunca un precio con el número <b>4</b>! Evitar también el 7. Un paquete a 444€ sería un fracaso comercial garantizado.</p>
+                </div>
+            </details>
+        </section>
+
+        <!-- Mini-Tarea 3: Valores -->
+        <section id="tarea-3" class="task-card">
+            <h2 class="text-2xl font-bold mb-4">Mini-tarea 3: Valores - Confianza y contexto</h2>
+            <p class="mb-6 text-lg">Este es el caso de Women's Secret. La diferencia en la imagen de portada es obvia. Fijaos bien en los **menús de navegación**.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <img src="wsecret-spain.png" alt="Women's Secret España" class="w-full h-auto rounded-lg shadow-md clickable-image">
+                    <p class="mt-2 font-semibold text-center">España</p>
+                </div>
+                <div>
+                    <img src="wsecret-pakistan.png" alt="Women's Secret Pakistán" class="w-full h-auto rounded-lg shadow-md clickable-image">
+                     <p class="mt-2 font-semibold text-center">Pakistán</p>
+                </div>
+            </div>
+
+            <p class="font-bold text-xl mb-4 text-center">¿Por qué la web de España va directa al producto ("Sujetadores", "Braguitas") y la de Pakistán destaca "La Marca", "Nuestra Campaña", "Tiendas"?</p>
+
+            <details>
+                <summary>Pistas para el análisis</summary>
+                <div class="bg-white">
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><b>Confianza vs. conversión:</b> ¿El objetivo principal es vender ya, o primero generar confianza?</li>
+                        <li><b>Aversión a la incertidumbre:</b> ¿Necesita el cliente mucha información sobre la empresa antes de comprar?</li>
+                        <li><b>Mercado maduro vs. mercado nuevo:</b> ¿La marca ya es muy conocida en ese país o necesita presentarse desde cero?</li>
+                        <li><b>Presencia física:</b> ¿Por qué sería importante destacar que existen "Tiendas" físicas en un mercado nuevo?</li>
+                         <li><b>Contexto cultural:</b> En un mercado más conservador, ¿es mejor empezar hablando de la marca y sus valores que del producto en sí (lencería)?</li>
+                    </ul>
+                </div>
+            </details>
+        </section>
+    </div>
+
+    <!-- Modal para imagen a pantalla completa -->
+    <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-80 z-50 hidden items-center justify-center p-4">
+        <div class="relative">
+            <img id="modalImage" src="" class="max-w-[90vw] max-h-[90vh] rounded-lg shadow-2xl">
+            <button id="closeModal" class="absolute -top-4 -right-4 bg-white rounded-full p-2 text-gray-800 hover:bg-gray-200 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+    </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const closeModalBtn = document.getElementById('closeModal');
+
+        document.querySelectorAll('.clickable-image').forEach(img => {
+            img.addEventListener('click', function() {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                modalImg.src = this.src;
+            });
+        });
+
+        function closeModal() {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            modalImg.src = '';
+        }
+
+        closeModalBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
+
